@@ -5,7 +5,7 @@ public class User {
     private String uuid;
     private String password;
 
-    public User(String username, String uuid, String password) {
+    public User(String uuid, String username, String password) {
         this.username = username;
         this.uuid = uuid;
         this.password = password;
@@ -18,6 +18,14 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "uuid='" + uuid + '\'' +
+                ", username='" + username + '\'' +
+                '}';
     }
 
     public String getUuid() {

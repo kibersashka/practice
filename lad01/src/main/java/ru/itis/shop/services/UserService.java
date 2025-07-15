@@ -3,16 +3,19 @@ package ru.itis.shop.services;
 import ru.itis.shop.DTO.UserDTO;
 import ru.itis.shop.entities.User;
 import ru.itis.shop.repositories.UserRepository;
+import ru.itis.shop.repositories.UserRepositoryFile;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
     private final UserRepository userRepository;
+    private final UserRepositoryFile userRepositoryFile;
     private final int MAX_PASSWORD_LENGTH = 7;
 
     public UserService() {
         this.userRepository = new UserRepository();
+        this.userRepositoryFile = new UserRepositoryFile();
     }
 
     public void signUp(String username, String password){
@@ -31,4 +34,13 @@ public class UserService {
                 .map(user -> new UserDTO(user.getUsername(), user.getUuid()))
                 .toList();
     }
+    /**TODO: а как сделать новые методы примерное решение
+     * 1! создать новые методы
+     * 2! создать обьект интефейса
+     * но вот как определить у чего вызывать
+     * и если решение 1 то как вызывать откуда пользовательн в консоли это может знать
+     *
+     */
+
+
 }
