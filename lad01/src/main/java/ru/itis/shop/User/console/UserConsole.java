@@ -1,8 +1,7 @@
-package ru.itis.shop.console;
+package ru.itis.shop.User.console;
 
-import ru.itis.shop.DTO.UserDTO;
-import ru.itis.shop.entities.User;
-import ru.itis.shop.services.UserService;
+import ru.itis.shop.User.DTO.UserDTO;
+import ru.itis.shop.User.service.UserService;
 
 import java.util.List;
 import java.util.Scanner;
@@ -11,9 +10,9 @@ public class UserConsole {
     private final Scanner scanner;
     private final UserService userService;
 
-    public UserConsole(){
+    public UserConsole(UserService userService){
         this.scanner = new Scanner(System.in);
-        this.userService = new UserService();
+        this.userService = userService;
     }
     public void signUp(){
         System.out.println("Enter data for join:");
@@ -28,5 +27,12 @@ public class UserConsole {
             System.out.println(userDTO.getUuid() + "|" + userDTO.getUsername());
         }
 
+    }
+    public void updatePassword(){
+        //TODO: вызвать сервис
+        System.out.println("Введите id пользователя для обновления пароля:");
+        String uuid = scanner.nextLine();
+        String newPassword = scanner.nextLine();
+        userService.updatePassword(uuid, newPassword);
     }
 }

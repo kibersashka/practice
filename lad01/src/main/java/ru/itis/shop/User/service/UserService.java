@@ -1,26 +1,25 @@
-package ru.itis.shop.services;
+package ru.itis.shop.User.service;
 
-import ru.itis.shop.DTO.UserDTO;
-import ru.itis.shop.entities.User;
-import ru.itis.shop.repositories.UserRepository;
-import ru.itis.shop.repositories.UserRepositoryFile;
+import ru.itis.shop.User.DTO.UserDTO;
+import ru.itis.shop.User.entity.User;
+import ru.itis.shop.User.repositories.UserRepository;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class UserService {
     private final UserRepository userRepository;
-    private final UserRepositoryFile userRepositoryFile;
+
     private final int MAX_PASSWORD_LENGTH = 7;
 
-    public UserService() {
-        this.userRepository = new UserRepository();
-        this.userRepositoryFile = new UserRepositoryFile();
+    public UserService(UserRepository userRepoitory) {
+        this.userRepository = userRepoitory;
+
     }
 
     public void signUp(String username, String password){
         chekValidatePassword(password);
-        User user = new User(username, password);
+        User user = new User(password, username);
         userRepository.save(user);
     }
 
@@ -41,6 +40,16 @@ public class UserService {
      * и если решение 1 то как вызывать откуда пользовательн в консоли это может знать
      *
      */
+    public void updatePassword(String uuid, String newPassword){
+        //TODO: мне нужно найти по айди и создать
+        // нового юзера затем удалить старого или лучше перезаписать весь файл
+        User user = userRepository
+                .findById(uuid)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        user.setPassword(newPassword);
+        System.out.println(user);
+        userRepository.update(user);
+    }
 
 
 }

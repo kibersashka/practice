@@ -1,4 +1,4 @@
-package ru.itis.shop.DTO;
+package ru.itis.shop.User.DTO;
 
 public class UserDTO {
     private final String username;
